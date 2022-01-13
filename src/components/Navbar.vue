@@ -1,6 +1,7 @@
 <template>
   <v-container
     fluid
+    style="padding: 0"
   >
     <v-app-bar
       color="red"

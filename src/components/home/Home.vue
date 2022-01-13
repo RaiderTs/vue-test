@@ -2,10 +2,8 @@
 
   <v-col class='col' cols="3">
     <v-card   @click="openPhoto" class='card' >
-      <v-card-title class='card-title'>{{photo.name}}</v-card-title>
       <v-card-text class='card-text'>
-        <v-img  class='card-img' :src="photo.image.url" width="250" height="250" />
-        <!-- <v-text class='text'>{{photo.description}}</v-text> -->
+        <v-img  class='card-img' :src="photo.url" width="250" height="250" />
       </v-card-text> 
     </v-card>
   </v-col>
@@ -32,8 +30,6 @@ export default {
 
 <style lang="css">
  .card-text{
-   /* display: flex;
-   height: 350px; */
    margin-top: 15px;
  }
 
@@ -48,9 +44,13 @@ export default {
  }
 .col {
   box-shadow: 16px 16px 28px 0px rgba(34, 60, 80, 0.2);
-  padding: 0;
-  background: cornsilk;
-  border: 1px solid red;
+  padding: 2px;
+  transition: transition 250ms cubic-bezier(0.4, 0, 0.2, 1)
+}
+
+.col:hover{
+  transform: scale(1,01);
+  border: 1px solid red
 }
 
 .card {

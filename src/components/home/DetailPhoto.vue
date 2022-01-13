@@ -1,13 +1,9 @@
 <template>
     <v-dialog v-model="dialogVisible" max-width="600">
         <v-card>
-            <v-card-title>
-                {{ photo.name }}
-            </v-card-title>
-            <v-card-text>
-                <v-img :src="photo.image.url" width="400" height="400" />              
+            <v-card-text class="dialog-card-text" style="padding-top: 25px">
+                <v-img :src="photo.url" width="400" height="400" />
             </v-card-text>
-             <v-text name='description'>{{ photo.description }}</v-text>
         </v-card>
     </v-dialog>
 </template>
@@ -24,27 +20,26 @@ export default {
             default: false,
         },
     },
-    created(){
-       this.dialogVisible = this.value
+    created() {
+        this.dialogVisible = this.value;
     },
     data: () => ({
-        dialogVisible: false
+        dialogVisible: false,
     }),
     watch: {
-        value(newValue){
-            this.dialogVisible = newValue
+        value(newValue) {
+            this.dialogVisible = newValue;
         },
-        dialogVisible(newValue){
-            this.$emit('input', newValue)
-        }
+        dialogVisible(newValue) {
+            this.$emit("input", newValue);
+        },
     },
-    // computed: {
-    //     img(){
-    //         return this.photo.image.url
-    //     }
-    // }
 };
 </script>
 
 <style lang="css" scoped>
+.dialog-card-text {
+    display: flex;
+    padding-top: 20px;
+}
 </style>>

@@ -1,26 +1,38 @@
 <template lang="">
   <v-container >
-    <v-row class="row">  
-       <v-col class='col' cols="3">
-    <v-card   class='card' >
-      <v-card-text class='card-text'>
-      <v-img v-for="(photo,index) in photos"
-        :key="index"  :src="photo.url" width="250" height="250" />
-      </v-card-text> 
-    </v-card>
-  </v-col>
+    <v-select 
+        :items="[3,6,9,12]"
+        v-model="limit"
+        label="Limit of page"
+        attach
+        class="img-limit"
+    ></v-select>                           
+    <v-row  class="card-container">
+       <ViewImg v-for="(photo,index) in photos"
+        :key="index"  :photo="photo"/>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import ViewImg from "@/components/view/ViewImg.vue";
 export default {
+     components: {
+       ViewImg,
+    },
     data: () => ({
         photos: [],
+        limit: 3,
     }),
     mounted() {
         this.viewPhoto();
     },
+      watch: {
+            limit: function()
+            {
+                this.viewPhoto();
+            },
+        },
     methods: {
         async viewPhoto() {
             try {
@@ -28,7 +40,7 @@ export default {
                     "x-api-key": "3bc9e1ed-5617-459f-8119-6452e5039b46",
                 };
                 let response = await this.axios.get(
-                    "https://api.thecatapi.com/v1/images",
+                    `https://api.thecatapi.com/v1/images/?limit=${this.limit}`,
                 );
                 this.photos = response.data;
             } catch (error) {
@@ -40,10 +52,18 @@ export default {
 </script>
 
 <style lang="css">
-
-.row {
-    padding-top: 25px;
-    width: 100vw;
+.card-container {
+  max-width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
 }
+
+.img-limit{
+  font-weight: 700;
+  width: 300px;
+  margin: auto;
+}
+
 
 </style>
